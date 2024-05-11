@@ -28,8 +28,8 @@ DHT dht(DHTPIN, DHTTYPE);
 DHT dht2(DHTPIN2, DHTTYPE);
 Servo Servo1;
 
-const char* ssid = "Galaxy A14 6FAE";
-const char* password = "omar4444";
+const char* ssid = "OPPO Reno6";
+const char* password = "12345678";
 
 String phoneNumber = "+201270964567";
 String apiKey = "8420344";
@@ -66,12 +66,7 @@ void setup() {
   pinMode(servopin, OUTPUT);
   dht.begin();
   dht2.begin();
-  ESP32PWM::allocateTimer(0);
-	ESP32PWM::allocateTimer(1);
-	ESP32PWM::allocateTimer(2);
-	ESP32PWM::allocateTimer(3);
-  Servo1.setPeriodHertz(50);    // standard 50 hz servo
-	Servo1.attach(servopin, 1000, 2000);
+  Servo1.attach(servopin);
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
   while(WiFi.status() != WL_CONNECTED) {
@@ -147,18 +142,14 @@ void loop() {
     Serial.println("It is bright outside");
     sendMessage("It is bright outside");
     PhotoERR = false;
+    delay(500);  
   }
   else if (photosensor<1000 && PhotoERR == false){
     Servo1.write(0);
     Serial.println("It is dark outside");
     sendMessage("It is dark outside");
     PhotoERR = true;
-  }
-  if (PhotoERR == false){
-    Servo1.write(90);
-  }
-  else{
-    Servo1.write(0);
+    delay(500);  
   }
   if(ppm>700 && CO2ERR == true){
     digitalWrite(fanpin, LOW);

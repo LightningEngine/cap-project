@@ -31,8 +31,8 @@ Servo Servo1;
 const char* ssid = "Galaxy A14 6FAE";
 const char* password = "omar4444";
 
-String phoneNumber = "+201274391748";
-String apiKey = "6013663";
+String phoneNumber = "+201270964567";
+String apiKey = "8420344";
 
 void sendMessage(String message){
 
